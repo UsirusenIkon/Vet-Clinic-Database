@@ -10,7 +10,7 @@ SELECT * FROM animals WHERE name != 'Gabumon';
 SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
 
 BEGIN;
-UPDATE animal SET specie = 'unspecified';
+UPDATE animal SET species = 'unspecified';
 ROLLBACK;
 
 BEGIN
@@ -33,14 +33,10 @@ COMMIT;
 SELECT COUNT(*) FROM animals;
 SELECT COUNT(*) FROM animals WHERE escape_attempts = 0;
 SELECT AVG(weight_kg) FROM animals;
-SELECT MAX(escape_attempts) FROM animals;
+SELECT neutered, SUM(escape_attempts) FROM animals GROUP BY neutered;
 
 /*What is the minimum and maximum weight of each type of animal?*/
-  SELECT MIN(weight_kg) FROM animals WHERE species = 'Digmon';
-  SELECT MAX(weight_kg) FROM animals WHERE species = 'Digmon';
-  SELECT MAX(weight_kg) FROM animals WHERE species = 'Pokemon';
-  SELECT MIN(weight_kg) FROM animals WHERE species = 'Pokemon';
+SELECT species, MAX(weight_kg), MIN(weight_kg) FROM animals GROUP BY species;
 
 /*What is the average number of escape attempts per animal type of those born between 1990 and 2000?*/
-  SELECT AVG(escape_attempts) FROM animals WHERE species = 'Digmon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
-  SELECT AVG(escape_attempts) FROM animals WHERE species = 'Pokemon' AND date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
+SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY species;
