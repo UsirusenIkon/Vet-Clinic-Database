@@ -12,14 +12,14 @@ CREATE TABLE animals (
 );
 
 CREATE TABLE owners (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    id INT AUTO_INCREMENT,
     full_name varchar(100),
     age integer,
     PRIMARY KEY(id),
 );
 
 CREATE TABLE species (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    id INT AUTO_INCREMENT,
     name varchar(100),
     PRIMARY KEY(id),
 );
